@@ -1,0 +1,51 @@
+{% extends 'account/base.html' %}
+{% block title %} Signup|{% endblock  %}
+
+{% block body %}
+<div>
+    <li>
+      <a href="{% url 'login'%}"><button class="btn btn-info ms-5 my-2 mb-1">login</button></a>
+  </li>
+</div>
+<div  class="container">
+    <div class="col-sm-4 mx-auto " style="background-color:lightblue; border:1px; border-radius: 10px; padding: 10px;" >
+        <h2 class="alert text-center" style="padding: 5px;">User Registration</h2><hr>
+        {% if messages %}
+        <div class="alert alert-danger" role="alert" style="padding:5px;">
+            {% for i in messages %}
+            <div class="alert-link text-center text-success">{{i}}</div>
+            {% endfor %}
+        </div>
+        {% endif %}    
+        <div class="row">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="mb-2">
+                  <label class="form-label">Name</label>
+                  <input type="text" class="form-control" name="name"  required>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Email address</label>
+                    <input type="email" class="form-control" name="email" required>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Mobile</label>
+                    <input type="tel" class="form-control" name="phone" required>
+                </div>
+                <div class="mb-2">
+                  <label class="form-label">Password</label>
+                  <input type="password" class="form-control" name="pass1" required>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" name="pass2" required>
+                  </div>
+                <button type="submit" class="btn btn-primary w-100 my-2">Submit</button>
+              </form>
+              <div class="footer text-center ">
+                Are you member ? <a href="{%url 'login'%}">Login</a>
+              </div>    
+            </div>
+    </div>
+</div>
+{% endblock  %}

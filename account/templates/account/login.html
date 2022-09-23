@@ -1,0 +1,41 @@
+{% extends 'account/base.html' %}
+{% block title %}login|{% endblock  %}
+
+{% block body %}
+<div>
+    <li>
+      <a href="{% url 'signup'%}"><button class="btn btn-info ms-5 my-2 mb-5">signup</button></a>
+  </li>
+</div>
+<div  class="container">
+    <div class="col-sm-4 mx-auto " style="background-color:lightblue; border:1px; border-radius: 10px; padding: 10px;">
+        <h2 class="alert text-center" style="padding: 5px;">User login</h2><hr>
+
+        {% if messages %}
+        <div class="alert alert-danger" role="alert" style="padding:5px;">
+            {% for i in messages %}
+            <div class="alert-link text-center text-success">{{i}}</div>
+            {% endfor %}
+        </div>
+        {% endif %}    
+
+        <div class="row">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="mb-2">
+                    <label class="form-label">Email address</label>
+                    <input type="email" class="form-control" name="email" >
+                </div>
+                <div class="mb-2">
+                  <label class="form-label">Password</label>
+                  <input type="password" class="form-control" name="password">
+                </div>
+                <button type="submit" class="btn btn-primary w-100 my-4 mx-auto">Login</button>
+              </form>
+              <div class="footer text-center" >
+                Not a member ? <a href="{%url 'signup'%}">Signup</a>
+              </div>  
+            </div>
+    </div>
+</div>
+{% endblock  %}

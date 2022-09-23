@@ -1,0 +1,72 @@
+{% extends 'account/base.html' %}
+{% block title %}Store |{% endblock  %}
+
+{% block body %}
+<!-- MENU -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><h3>Book Inventory Management System</h3></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'store'%}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'addbook' %}">Add New Book</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'outstock' %}">Out of stock</a>
+          </li>
+
+        </ul>
+        <a class="nav-link" href="{% url 'logout'%}"><button class=" btn btn-info ms-5">LogOut</button></a>
+      </div>
+    </div>
+  </nav>
+
+<div class="container mt-5">
+    <table class="table bg-light">
+        <label class=" mb-1 table table-hover" style='color:blue;'><b>Admin : </b>{{request.user.name}}</label>
+        <thead style="background-color:rgba(65, 235, 215, 0.6);">
+            <tr class="text-center">
+                <Th>Book_ID</Th>
+                <Th>Photo</Th>
+                <Th>Name</Th>
+                <Th>Book_Tittle</Th>
+                <Th>Book_Author</Th>
+                <Th>Total_Quantity</Th>                
+                <Th>Available_Quantity</Th>
+                <Th>Publish Date</Th>
+                <th>ListOutBook</th>
+                <th>UpdateBook</th>
+                <th>DeleteBook</th>
+            </tr>
+        </thead>
+            {% for i in data %}
+            <tr class='text-center'>
+                <td>{{i.id}}</td>
+                <td><img src="/media/{{i.book_photo}}" class="rounded-squire" alt="love" height="60px" width="70px"></td>
+                <td>{{i.book_name}}</td>
+                <td>{{i.book_title}}</td>
+                <td>{{i.book_author}}</td>
+                <td>{{i.total_quantity}}</td>
+                <td>{{i.available_quantity}}</td>
+                <td>{{i.publish_date}}</td>
+                <td>
+                    <a href="/listout/{{i.id}}/"><button class="btn btn-warning ">ListOut</button></a>
+                </td>
+                <td>
+                    <a href="/update/{{i.id}}/"><button class="btn btn-info">Update</button></a>
+                </td>
+                <td>
+                    <a href="/delete/{{i.id}}/"><button class="btn btn-danger">Delete</button></a>
+                </td>
+            </tr>
+            {% endfor %}
+    </table>
+</div>
+{% endblock  %}
